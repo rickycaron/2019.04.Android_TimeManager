@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorTheme"
+    tools:context=".Register">
+    <TextView
+        android:id="@+id/textview53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="40dp"
+        android:layout_marginTop="80dp"
+        android:textColor="#FF5722"
+        android:text="Welcome!"/>
+
+
+
+
+
+    <EditText
+        android:id="@+id/editText51"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="150dp"
+        android:hint="enetr your user name"
+        android:textColorHint="@color/colorWhite"
+        />
+
+
+    <EditText
+        android:id="@+id/editText52"
+        android:layout_width="190dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="40dp"
+        android:hint="enetr your password"
+        android:textColorHint="@color/colorWhite"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/editText53"
+        android:layout_width="190dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="40dp"
+        android:hint="enetr your password again"
+        android:textColorHint="@color/colorWhite"
+        android:inputType="textPassword"
+        />
+    <Button
+        android:id="@+id/button51"
+        android:layout_width="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="35dp"
+        android:text="Check"
+        />
+    <Button
+        android:id="@+id/button52"
+        android:layout_width="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="35dp"
+        android:text="Register"
+        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textView51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already Registered?"
+            />
+        <TextView
+            android:id="@+id/textView52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Login Now"
+            />
+
+
+
+
+    </LinearLayout>
+</LinearLayout>
