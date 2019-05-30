@@ -69,7 +69,7 @@ public class Register extends AppCompatActivity {
                                 try {
                                     JSONObject isCorrectColumn = (JSONObject) response.get(0);
                                     if (isCorrectColumn.getInt("isCorrect") == 1) {
-                                        Toast.makeText(Register.this, "Successful UserName", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Register.this, "UserName Available", Toast.LENGTH_SHORT).show();
                                         checkName=true;
                                         editText52.setVisibility(View.VISIBLE);
                                         editText53.setVisibility(View.VISIBLE);

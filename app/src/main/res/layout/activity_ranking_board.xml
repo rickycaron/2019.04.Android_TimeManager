@@ -16,16 +16,6 @@
         android:textSize="38dp"
         android:layout_marginTop="20dp"
         android:text="Rankings"
-        android:textColor="@color/colorLightRed"
-        />
-
-    <Button
-        android:id="@+id/button81"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:text="Home"
         android:textColor="@color/colorWhite"
         />
 
@@ -49,5 +39,15 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button81"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-33dp"
+        android:background="@drawable/custom_button0"
+        android:text="Home"
+        android:textColor="@color/colorDark0" />
 
 </LinearLayout>

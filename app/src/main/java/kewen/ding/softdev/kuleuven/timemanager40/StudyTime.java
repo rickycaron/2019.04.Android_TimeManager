@@ -80,7 +80,7 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
         Intent intent=getIntent();//获得用户选择的时间
         int studytime=intent.getIntExtra(ChooseTime.EXTRA_MESSAGE,0);
         studyTime=studytime;
-        textView31.setText(" "+studytime);
+        textView31.setText("1");
         editTextMinute.setText(""+studytime);
 
         RequestQueue requestQueue31 = Volley.newRequestQueue(StudyTime.this);
@@ -176,7 +176,6 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
             // changing the timer status to stopped
             //        timerStatus = TimerStatus.STOPPED;
             //stopCountDownTimer();
-
         }
 
     }

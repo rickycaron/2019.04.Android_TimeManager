@@ -72,7 +72,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="92dp"
         android:textColor="@color/colorWhite"
-        android:textSize="20sp" />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/textView32"

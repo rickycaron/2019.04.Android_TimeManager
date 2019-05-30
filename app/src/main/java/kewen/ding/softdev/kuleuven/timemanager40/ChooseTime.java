@@ -43,7 +43,6 @@ public class ChooseTime extends AppCompatActivity implements TimePickerDialog.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_time);
         textView2=(TextView)findViewById(R.id.textView2);
-        textView2.setText("Pick your time");
         textView21=(TextView)findViewById(R.id.textView21);
         textView23=(TextView)findViewById(R.id.textView23);
         textView25=(TextView)findViewById(R.id.textView25);
@@ -83,7 +82,7 @@ public class ChooseTime extends AppCompatActivity implements TimePickerDialog.On
                     Toast.makeText(ChooseTime.this,"You haven't chosen your time",Toast.LENGTH_SHORT).show();
                 }
                 else if(studyTime<=0){
-                    Toast.makeText(ChooseTime.this,"Your time is negative,pivk a new one",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChooseTime.this,"The duration cannot be bigger than 24h",Toast.LENGTH_SHORT).show();
                 }
 
             }

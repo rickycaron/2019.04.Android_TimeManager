@@ -40,6 +40,7 @@ public class HomePage extends AppCompatActivity {
         editText11=findViewById(R.id.editText11);
         textView12=findViewById(R.id.textView12);
 
+
         Intent loginSuccess=getIntent();
         userName=loginSuccess.getStringExtra("This UserName");
         if (userName!=null){
@@ -127,75 +128,81 @@ public class HomePage extends AppCompatActivity {
         button12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Boolean haveBeenChecked=false;
-
-                RequestQueue requestQueue13 = Volley.newRequestQueue(HomePage.this);
-                String url13 = "https://studev.groept.be/api/a18_sd609/checkUserInQueto/";
-                url13 +=UsersName;//username
-                JsonArrayRequest jsonArrayRequest13 = new JsonArrayRequest(
-                        Request.Method.GET, url13, null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                try {
-                                    JSONObject isChecked = (JSONObject) response.get(0);
-                                    if (isChecked.getInt("isCorrect") == 1) {
-
-                                         RequestQueue requestQueue14 = Volley.newRequestQueue(HomePage.this);
-                                        String url14 = "https://studev.groept.be/api/a18_sd609/deleteQueto/";
-                                        url14 +=UsersName;//username
-                                        JsonArrayRequest jsonArrayRequest14 = new JsonArrayRequest(
-                                                Request.Method.GET, url14, null,
-                                                new Response.Listener<JSONArray>() {
-                                                    @Override
-                                                    public void onResponse(JSONArray response) {}
-                                                },
-                                                new Response.ErrorListener() {
-                                                    @Override
-                                                    public void onErrorResponse(VolleyError error) {
-                                                    }
-                                                }
-                                        );
-                                         requestQueue14.add(jsonArrayRequest14);
+                for (int i=0;i<2;i++){
+                    switch (i){
+                        case 0:
+                            RequestQueue requestQueue13 = Volley.newRequestQueue(HomePage.this);
+                            String url13 = "https://studev.groept.be/api/a18_sd609/checkUserInQueto/";
+                            url13 += UsersName;//username
+                            JsonArrayRequest jsonArrayRequest13 = new JsonArrayRequest(
+                                    Request.Method.GET, url13, null,
+                                    new Response.Listener<JSONArray>() {
+                                        @Override
+                                        public void onResponse(JSONArray response) {
+                                            try {
+                                                JSONObject isChecked = (JSONObject) response.get(0);
+                                                if (isChecked.getInt("isCorrect") == 1) {
+                                                    RequestQueue requestQueue14 = Volley.newRequestQueue(HomePage.this);
+                                                    String url14 = "https://studev.groept.be/api/a18_sd609/deleteQueto/";
+                                                    url14 += UsersName;//username
+                                                    JsonArrayRequest jsonArrayRequest14 = new JsonArrayRequest(
+                                                            Request.Method.GET, url14, null,
+                                                            new Response.Listener<JSONArray>() {
+                                                                @Override
+                                                                public void onResponse(JSONArray response) {
+                                                                }
+                                                            },
+                                                            new Response.ErrorListener() {
+                                                                @Override
+                                                                public void onErrorResponse(VolleyError error) {
+                                                                }
+                                                            }
+                                                    );
+                                                    requestQueue14.add(jsonArrayRequest14);
+                                                } else {}
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }; }},
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                        }
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                };
+                            );
+                            requestQueue13.add(jsonArrayRequest13);
+                            break;
+                        case 1:
+                            RequestQueue requestQueue12 = Volley.newRequestQueue(HomePage.this);
+                            String url12 = "https://studev.groept.be/api/a18_sd609/add_quote/";
+                            String myQuote = editText11.getText().toString();
+                            url12 += UsersName;//username
+                            url12 += "/" + myQuote;//quote
+                            if (myQuote == null) {
+                                Toast.makeText(HomePage.this, "Type your new quote", Toast.LENGTH_SHORT).show();
+                            } else {
+                                JsonArrayRequest jsonArrayRequest12 = new JsonArrayRequest(
+                                        Request.Method.GET, url12, null,
+                                        new Response.Listener<JSONArray>() {
+                                            @Override
+                                            public void onResponse(JSONArray response) {
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                            }
+                                        }
+                                );
+                                requestQueue12.add(jsonArrayRequest12);
                             }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                            }
-                        }
-                );
-                requestQueue13.add(jsonArrayRequest13);
-
-
-                RequestQueue requestQueue12 = Volley.newRequestQueue(HomePage.this);
-                String url12 = "https://studev.groept.be/api/a18_sd609/add_quote/";
-                String myQuote=editText11.getText().toString();
-                url12 += UsersName;//username
-                url12 += "/"+myQuote;//quote
-                if(myQuote==null){Toast.makeText(HomePage.this,"Type your new quote",Toast.LENGTH_SHORT).show();}
-                else{JsonArrayRequest jsonArrayRequest12 = new JsonArrayRequest(
-                        Request.Method.GET, url12, null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                            }
-                        }
-                );
-                requestQueue12.add(jsonArrayRequest12);}
-
-            }//onClick()
+                            break;
+                            default:
+                                break;
+                    }
+                }
+                    }
+            //onClick()
         });
-
 
     }//onCreate()
 }//definition of the class

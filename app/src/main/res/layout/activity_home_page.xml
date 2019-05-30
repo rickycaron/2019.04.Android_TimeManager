@@ -12,9 +12,9 @@
         android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="40dp"
+        android:layout_marginTop="80dp"
         android:textSize="30dp"
-        android:text="Hello"
+        android:text="Welcome back"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         />
@@ -22,9 +22,10 @@
     <TextView
         android:id="@+id/textView12"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:text="Click me"
         android:textSize="20dp"
+        android:layout_marginTop="20dp"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         />
@@ -33,46 +34,69 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         >
         <EditText
             android:id="@+id/editText11"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:hint="Type your motto here"
+            android:hint="Anything to say?"
             android:textSize="20sp"
             android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:inputType="text"
             android:layout_weight="1"
-            />
 
+            />
 
         <Button
             android:id="@+id/button12"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:text="Click Twice"
+            android:background="@drawable/custom_button0"
             />
     </LinearLayout>
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="115dp"
+    >
+
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button0"
+        android:text="@string/sign"
+        android:layout_margin="20dp"
+        android:textSize="22dp" />
 
 
     <Button
         android:id="@+id/button11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="280dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/custom_button0"
+        android:layout_margin="20dp"
         android:text="next" />
 
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="280dp"
-        android:text="Log out" />
+
+
+</RelativeLayout>
+
+
+
+
 </LinearLayout>

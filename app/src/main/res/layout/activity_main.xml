@@ -29,10 +29,10 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="55dp"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:hint="Tap your user name"
+        android:hint="Username"
         android:textColorHint="@color/colorWhite"
         android:textAlignment="center"
         />
@@ -40,9 +40,9 @@
     <EditText
         android:id="@+id/editText12"
         android:layout_width="200dp"
-        android:layout_height="45dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:hint="Tap your password"
+        android:hint="Password"
         android:textColorHint="@color/colorWhite"
         android:textAlignment="center"
         android:inputType="textPassword"
@@ -57,6 +57,7 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textSize="15dp"
             android:textColor="@color/colorWhite"
             android:text="Remember Password"
@@ -66,6 +67,7 @@
             android:id="@+id/checkbox1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textColor="@color/colorLightRed"
 
             />
@@ -78,13 +80,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_button0"
+        android:layout_marginTop="20dp"
         android:text="Login"/>
 
 
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="190dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="40dp">
         <TextView
@@ -92,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Not Registered?"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/colorWhite"
             />
         <TextView
@@ -99,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Registered One Now"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/colorWhite"
             />
 
@@ -112,6 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:visibility="invisible"
         android:text="button2"/>
 
 </LinearLayout>

@@ -95,7 +95,7 @@ public class Success extends AppCompatActivity {
                                 try {
                                     JSONObject isCorrectColumn = (JSONObject) response.get(0);
                                     if (isCorrectColumn.getInt("isCorrect") == 0) {
-                                        Toast.makeText(Success.this, "Successful UserName", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Success.this, "Valid Username", Toast.LENGTH_SHORT).show();
                                         userNameChecked=true;
                                         editText71.setEnabled(false);
                                     }

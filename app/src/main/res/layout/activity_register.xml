@@ -14,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="40dp"
         android:layout_marginTop="80dp"
-        android:textColor="#FF5722"
+        android:textColor="#FF4500"
         android:text="Welcome!"/>
 
 
@@ -27,7 +27,7 @@
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:layout_marginTop="150dp"
-        android:hint="enetr your user name"
+        android:hint="Username"
         android:textColorHint="@color/colorWhite"
         />
 
@@ -37,8 +37,9 @@
         android:layout_width="190dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="40dp"
-        android:hint="enetr your password"
+        android:hint="Password"
         android:textColorHint="@color/colorWhite"
+        android:layout_marginTop="10dp"
         android:inputType="textPassword"
         />
 
@@ -47,7 +48,8 @@
         android:layout_width="190dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="40dp"
-        android:hint="enetr your password again"
+        android:hint="Comfirm password"
+        android:layout_marginTop="10dp"
         android:textColorHint="@color/colorWhite"
         android:inputType="textPassword"
         />
@@ -56,6 +58,8 @@
         android:layout_width="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_button0"
         android:text="Check"
         />
     <Button
@@ -63,28 +67,30 @@
         android:layout_width="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button0"
         android:text="Register"
         />
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/textView51"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:text="Already Registered?"
             />
         <TextView
             android:id="@+id/textView52"
             android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:text=" Login Now"
             />
-
-
-
 
     </LinearLayout>
 </LinearLayout>

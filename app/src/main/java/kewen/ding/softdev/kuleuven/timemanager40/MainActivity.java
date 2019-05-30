@@ -107,14 +107,14 @@ public class MainActivity extends AppCompatActivity {
                                         editor.apply();
 
                                         userNameThis=usernameInput;
-                                        Toast.makeText(MainActivity.this, "Success in Login", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Successfully Login", Toast.LENGTH_SHORT).show();
                                         Intent intentIn=new Intent(MainActivity.this,HomePage.class);
                                         intentIn.putExtra("This UserName",userNameThis);
                                         startActivity(intentIn);
                                         //success
                                     }
                                     else {
-                                        Toast.makeText(MainActivity.this, "Failed in Login", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                                         //fail
                                     }
                                 } catch (JSONException e) {
