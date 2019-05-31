@@ -8,6 +8,15 @@
     android:background="@color/colorTheme"
     tools:context=".StudyTime">
 
+    <ImageView
+        android:id="@+id/music51"
+        android:layout_width="52dp"
+        android:layout_height="48dp"
+        android:foregroundGravity="top"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/music" />
+
     <ProgressBar
         android:id="@+id/progressBarCircle"
         style="?android:attr/progressBarStyleHorizontal"
@@ -45,15 +54,7 @@
         android:textColor="@color/colorLightRed"
         android:textSize="40sp" />
 
-    <ImageView
-        android:id="@+id/imageViewReset"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/textViewTime"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/icon_reset"
-        android:visibility="gone" />
+
 
     <ImageView
         android:id="@+id/imageViewStartStop"

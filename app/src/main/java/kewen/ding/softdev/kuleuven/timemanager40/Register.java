@@ -56,11 +56,10 @@ public class Register extends AppCompatActivity {
         button51.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name=editText51.getText().toString();
+                final String name=editText51.getText().toString();
                 RequestQueue requestQueue = Volley.newRequestQueue(Register.this);
                 String url = "https://studev.groept.be/api/a18_sd609/checkUserName/";
-                url=url+name;
-
+                url=url+name;//检查用户名是否重复
                 JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                         Request.Method.GET, url, null,
                         new Response.Listener<JSONArray>() {
@@ -68,13 +67,17 @@ public class Register extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 try {
                                     JSONObject isCorrectColumn = (JSONObject) response.get(0);
-                                    if (isCorrectColumn.getInt("isCorrect") == 1) {
+                                    if (isCorrectColumn.getInt("isCorrect") == 1&& name.trim().lastIndexOf(" ")== -1) {//不能包含空格
                                         Toast.makeText(Register.this, "UserName Available", Toast.LENGTH_SHORT).show();
                                         checkName=true;
                                         editText52.setVisibility(View.VISIBLE);
                                         editText53.setVisibility(View.VISIBLE);
                                         button51.setVisibility(View.INVISIBLE);
                                         button52.setVisibility(View.VISIBLE);
+                                    }
+                                    else if ( name.trim().lastIndexOf(" ")!= -1){
+                                        Toast.makeText(Register.this, "No space in name", Toast.LENGTH_SHORT).show();
+                                        checkName=false;
                                     }
                                     else {
                                         Toast.makeText(Register.this, "This name existed", Toast.LENGTH_SHORT).show();
@@ -121,7 +124,6 @@ public class Register extends AppCompatActivity {
                                         intentLogin.putExtra("uesr_userName", name);
                                         intentLogin.putExtra("uesr_password", password1);
                                         startActivity(intentLogin);
-
                                     }
                                 },
                                 new Response.ErrorListener() {

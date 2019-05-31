@@ -1,6 +1,7 @@
 package kewen.ding.softdev.kuleuven.timemanager40;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,16 +32,24 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
         STOPPED
     }
 
+    private enum MusicPlaying{
+        PLAYING,
+        STOPING
+    }
+
     private TimerStatus timerStatus = TimerStatus.STOPPED;
+    private MusicPlaying musicPlayingState=MusicPlaying.STOPING;
+
+    MediaPlayer player;
 
     private ProgressBar progressBarCircle;
     private TextView editTextMinute;
     private TextView textViewTime;
-    private ImageView imageViewReset;
     private ImageView imageViewStartStop;
     private CountDownTimer countDownTimer;
     private TextView textView31;
     private int studyTime;
+    private ImageView imageViewMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +57,7 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
         // method call to initialize the views
         initViews();
         // method call to initialize the listeners
-        initListeners();
+        imageViewStartStop.setOnClickListener(this);
     }
 
     @Override
@@ -74,14 +83,22 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
         progressBarCircle = (ProgressBar) findViewById(R.id.progressBarCircle);
         editTextMinute = (TextView) findViewById(R.id.editTextMinute);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
-        imageViewReset = (ImageView) findViewById(R.id.imageViewReset);
         imageViewStartStop = (ImageView) findViewById(R.id.imageViewStartStop);
         textView31=(TextView)findViewById(R.id.textView31);
+
         Intent intent=getIntent();//获得用户选择的时间
         int studytime=intent.getIntExtra(ChooseTime.EXTRA_MESSAGE,0);
         studyTime=studytime;
-        textView31.setText("1");
         editTextMinute.setText(""+studytime);
+        imageViewMusic=findViewById(R.id.music51);
+
+        imageViewMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (musicPlayingState==MusicPlaying.STOPING){play(v); }
+                else{ pause(v);}
+            }
+        });
 
         RequestQueue requestQueue31 = Volley.newRequestQueue(StudyTime.this);
         String url = "https://studev.groept.be/api/a18_sd609/getQuote/";
@@ -110,14 +127,6 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
-     * method to initialize the click listeners
-     */
-    private void initListeners() {
-        imageViewReset.setOnClickListener(this);
-        imageViewStartStop.setOnClickListener(this);
-    }
-
-    /**
      * implemented method to listen clicks
      *
      * @param view
@@ -125,38 +134,21 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imageViewReset:
-                reset();
-                break;
             case R.id.imageViewStartStop:
                 startStop();
                 break;
         }
     }
-
-    /**
-     * method to reset count down timer
-     */
-    private void reset() {
-        stopCountDownTimer();
-        startCountDownTimer();
-    }
-
-
     /**
      * method to start and stop count down timer
      */
     private void startStop() {
         if (timerStatus == TimerStatus.STOPPED) {
-
             // call to initialize the timer values
             setTimerValues();
             // call to initialize the progress bar values
             setProgressBarValues();
-            // showing the reset icon
-            imageViewReset.setVisibility(View.INVISIBLE);
             // changing play icon to stop icon
-            imageViewStartStop.setImageResource(R.drawable.icon_stop);
             imageViewStartStop.setVisibility(View.INVISIBLE);
             // making edit text not editable
             //editTextMinute.setEnabled(false);
@@ -164,18 +156,6 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
             timerStatus = TimerStatus.STARTED;
             // call to start the count down timer
             startCountDownTimer();
-
-        } else {
-
-            // hiding the reset icon
-            //   imageViewReset.setVisibility(View.GONE);
-            // changing stop icon to start icon
-            //   imageViewStartStop.setImageResource(R.drawable.icon_start);
-            // making edit text editable
-            //editTextMinute.setEnabled(true);
-            // changing the timer status to stopped
-            //        timerStatus = TimerStatus.STOPPED;
-            //stopCountDownTimer();
         }
 
     }
@@ -185,14 +165,7 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
      */
     private void setTimerValues() {
         int time = 0;
-        if (!editTextMinute.getText().toString().isEmpty()) {
-            // fetching value from edit text and type cast to integer
-            time = Integer.parseInt(editTextMinute.getText().toString().trim());
-        } else {
-            // toast message to fill edit text
-            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
-        }
-        // assigning values after converting to milliseconds
+       time=studyTime;
         timeCountInMilliSeconds = time * 60 * 1000;
     }
 
@@ -200,27 +173,18 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
      * method to start count down timer
      */
     private void startCountDownTimer() {
-
         countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
-
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
 
             }
 
             @Override
             public void onFinish() {
-
-                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
-                // call to initialize the progress bar values
-                setProgressBarValues();
-                // hiding the reset icon
-                imageViewReset.setVisibility(View.GONE);
+                stopPlayer();
                 // changing stop icon to start icon
-                imageViewStartStop.setImageResource(R.drawable.icon_start);
                 imageViewStartStop.setVisibility(View.GONE);
                 // making edit text editable
                 //editTextMinute.setEnabled(true);
@@ -231,25 +195,15 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
                 finishCounting.putExtra("The time counted successfully",studyTime);
                 startActivity(finishCounting);
                 StudyTime.this.finish();
-
             }
-
         }.start();
         countDownTimer.start();
-    }
-
-    /**
-     * method to stop count down timer
-     */
-    private void stopCountDownTimer() {
-        countDownTimer.cancel();
     }
 
     /**
      * method to set circular progress bar values
      */
     private void setProgressBarValues() {
-
         progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
         progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
     }
@@ -267,8 +221,48 @@ public class StudyTime extends AppCompatActivity implements View.OnClickListener
                 TimeUnit.MILLISECONDS.toHours(milliSeconds),
                 TimeUnit.MILLISECONDS.toMinutes(milliSeconds) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliSeconds)),
                 TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliSeconds)));
-
         return hms;
 
+    }
+
+
+    public void play(View v){
+        musicPlayingState=MusicPlaying.PLAYING;
+        if(player==null){
+            player=MediaPlayer.create(this, R.raw.song);
+        }
+        player.start();
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicPlayingState=MusicPlaying.STOPING;
+                stopPlayer();
+            }
+        });
+    }
+
+    public void pause(View v){
+        if(player!=null){
+            musicPlayingState=MusicPlaying.STOPING;
+            player.pause();
+        }
+    }
+
+    public void stop(View v){
+        stopPlayer();
+    }
+    private void stopPlayer(){
+        if(player!=null){
+            musicPlayingState=MusicPlaying.STOPING;
+            player.release();
+            player=null;
+            Toast.makeText(this,"MediaPlayer released",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopPlayer();
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,6 +27,7 @@ public class Success extends AppCompatActivity {
     public int successfulStudyTime;
     private String username;
     private Boolean userNameChecked;
+    private ImageView imageView71;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +35,21 @@ public class Success extends AppCompatActivity {
         button71=findViewById(R.id.button71);
         button72=findViewById(R.id.button72);
         editText71=findViewById(R.id.editText71);
+        imageView71=findViewById(R.id.imageView71);
         editText71.setText(HomePage.UsersName);
+        username=HomePage.UsersName;
         editText71.setEnabled(true);
-        userNameChecked=false;
+        userNameChecked=true;
 
         Intent intentFromStudy=getIntent();
         successfulStudyTime=intentFromStudy.getIntExtra("The time counted successfully",0);
+
+        imageView71.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Success.this,"Good Job!",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         button71.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +81,6 @@ public class Success extends AppCompatActivity {
                                     public void onErrorResponse(VolleyError error) {
                                     }
                                 }
-
                         );
                         requestQueue.add(jsonArrayRequest);
 
@@ -78,6 +88,7 @@ public class Success extends AppCompatActivity {
                 }
             }//onClick
         });
+
 
         button72.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,6 +11,7 @@ public class Welcome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -20,4 +21,4 @@ public class Welcome extends AppCompatActivity {
             }
         }, SPLASH_TIME_OUT);
     }
-}
+}// reference:https://www.youtube.com/watch?v=jXtof6OUtcE

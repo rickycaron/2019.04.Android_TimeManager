@@ -40,8 +40,7 @@ public class HomePage extends AppCompatActivity {
         editText11=findViewById(R.id.editText11);
         textView12=findViewById(R.id.textView12);
 
-
-        Intent loginSuccess=getIntent();
+        Intent loginSuccess=getIntent();//捕获intent
         userName=loginSuccess.getStringExtra("This UserName");
         if (userName!=null){
             UsersName=userName;
@@ -94,43 +93,12 @@ public class HomePage extends AppCompatActivity {
         );
         requestQueue11.add(jsonArrayRequest11);
 
-        textView12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestQueue requestQueue15 = Volley.newRequestQueue(HomePage.this);
-                String url15 = "https://studev.groept.be/api/a18_sd609/getQuote/";
-                url15 += UsersName;//username
-                JsonArrayRequest jsonArrayRequest15 = new JsonArrayRequest(
-                        Request.Method.GET, url15, null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                try {
-                                    JSONObject myquote = (JSONObject) response.get(0);
-                                    String extractedQuote=myquote.getString("quote");
-                                    textView12.setText(extractedQuote);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                };
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                            }
-                        }
-                );
-                requestQueue15.add(jsonArrayRequest15);
 
-            }//onClick
-        });
 
         button12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=0;i<2;i++){
-                    switch (i){
-                        case 0:
+
                             RequestQueue requestQueue13 = Volley.newRequestQueue(HomePage.this);
                             String url13 = "https://studev.groept.be/api/a18_sd609/checkUserInQueto/";
                             url13 += UsersName;//username
@@ -150,16 +118,122 @@ public class HomePage extends AppCompatActivity {
                                                             new Response.Listener<JSONArray>() {
                                                                 @Override
                                                                 public void onResponse(JSONArray response) {
+
+                                                                    RequestQueue requestQueue12 = Volley.newRequestQueue(HomePage.this);
+                                                                    String url12 = "https://studev.groept.be/api/a18_sd609/add_quote/";
+                                                                    String myQuote = editText11.getText().toString();
+                                                                    url12 += UsersName;//username
+                                                                    url12 += "/" + myQuote;//quote
+                                                                    if (myQuote == null) {
+                                                                        Toast.makeText(HomePage.this, "Type your new quote", Toast.LENGTH_SHORT).show();
+                                                                    } else {
+                                                                        JsonArrayRequest jsonArrayRequest12 = new JsonArrayRequest(
+                                                                                Request.Method.GET, url12, null,
+                                                                                new Response.Listener<JSONArray>() {
+                                                                                    @Override
+                                                                                    public void onResponse(JSONArray response) {
+                                                                                        RequestQueue requestQueue11 = Volley.newRequestQueue(HomePage.this);
+                                                                                        String url = "https://studev.groept.be/api/a18_sd609/getQuote/";
+                                                                                        url += UsersName;//username
+
+                                                                                        JsonArrayRequest jsonArrayRequest11 = new JsonArrayRequest(
+                                                                                                Request.Method.GET, url, null,
+                                                                                                new Response.Listener<JSONArray>() {
+                                                                                                    @Override
+                                                                                                    public void onResponse(JSONArray response) {
+                                                                                                        try {
+                                                                                                            JSONObject myquote = (JSONObject) response.get(0);
+                                                                                                            String extractedQuote=myquote.getString("quote");
+                                                                                                            textView12.setText(extractedQuote);
+                                                                                                        } catch (JSONException e) {
+                                                                                                            e.printStackTrace();
+                                                                                                        };
+                                                                                                    }
+                                                                                                },
+                                                                                                new Response.ErrorListener() {
+                                                                                                    @Override
+                                                                                                    public void onErrorResponse(VolleyError error) {
+                                                                                                    }
+                                                                                                }
+                                                                                        );
+                                                                                        requestQueue11.add(jsonArrayRequest11);
+                                                                                    }
+                                                                                },
+                                                                                new Response.ErrorListener() {
+                                                                                    @Override
+                                                                                    public void onErrorResponse(VolleyError error) {
+                                                                                    }
+                                                                                }
+                                                                        );
+                                                                        requestQueue12.add(jsonArrayRequest12);
+                                                                    }
+
                                                                 }
                                                             },
                                                             new Response.ErrorListener() {
                                                                 @Override
                                                                 public void onErrorResponse(VolleyError error) {
                                                                 }
-                                                            }
-                                                    );
+                                                            });
                                                     requestQueue14.add(jsonArrayRequest14);
-                                                } else {}
+                                                }
+                                                else if(isChecked.getInt("isCorrect") == 0){
+                                                    RequestQueue requestQueue12 = Volley.newRequestQueue(HomePage.this);
+                                                    String url12 = "https://studev.groept.be/api/a18_sd609/add_quote/";
+                                                    String myQuote = editText11.getText().toString();
+                                                    url12 += UsersName;//username
+                                                    url12 += "/" + myQuote;//quote
+                                                    if (myQuote == null) {
+                                                        Toast.makeText(HomePage.this, "Type your new quote", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        JsonArrayRequest jsonArrayRequest12 = new JsonArrayRequest(
+                                                                Request.Method.GET, url12, null,
+                                                                new Response.Listener<JSONArray>() {
+                                                                    @Override
+                                                                    public void onResponse(JSONArray response) {
+                                                                        RequestQueue requestQueue11 = Volley.newRequestQueue(HomePage.this);
+                                                                        String url = "https://studev.groept.be/api/a18_sd609/getQuote/";
+                                                                        url += UsersName;//username
+
+                                                                        JsonArrayRequest jsonArrayRequest11 = new JsonArrayRequest(
+                                                                                Request.Method.GET, url, null,
+                                                                                new Response.Listener<JSONArray>() {
+                                                                                    @Override
+                                                                                    public void onResponse(JSONArray response) {
+                                                                                        try {
+                                                                                            JSONObject myquote = (JSONObject) response.get(0);
+                                                                                            String extractedQuote=myquote.getString("quote");
+                                                                                            textView12.setText(extractedQuote);
+                                                                                        } catch (JSONException e) {
+                                                                                            e.printStackTrace();
+                                                                                        };
+                                                                                    }
+                                                                                },
+                                                                                new Response.ErrorListener() {
+                                                                                    @Override
+                                                                                    public void onErrorResponse(VolleyError error) {
+                                                                                    }
+                                                                                }
+                                                                        );
+                                                                        requestQueue11.add(jsonArrayRequest11);
+                                                                    }
+                                                                },
+                                                                new Response.ErrorListener() {
+                                                                    @Override
+                                                                    public void onErrorResponse(VolleyError error) {
+                                                                    }
+                                                                }
+                                                        );
+                                                        requestQueue12.add(jsonArrayRequest12);
+                                                    }
+
+
+
+
+
+
+
+                                                }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }; }},
@@ -170,38 +244,10 @@ public class HomePage extends AppCompatActivity {
                                     }
                             );
                             requestQueue13.add(jsonArrayRequest13);
-                            break;
-                        case 1:
-                            RequestQueue requestQueue12 = Volley.newRequestQueue(HomePage.this);
-                            String url12 = "https://studev.groept.be/api/a18_sd609/add_quote/";
-                            String myQuote = editText11.getText().toString();
-                            url12 += UsersName;//username
-                            url12 += "/" + myQuote;//quote
-                            if (myQuote == null) {
-                                Toast.makeText(HomePage.this, "Type your new quote", Toast.LENGTH_SHORT).show();
-                            } else {
-                                JsonArrayRequest jsonArrayRequest12 = new JsonArrayRequest(
-                                        Request.Method.GET, url12, null,
-                                        new Response.Listener<JSONArray>() {
-                                            @Override
-                                            public void onResponse(JSONArray response) {
-                                            }
-                                        },
-                                        new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                            }
-                                        }
-                                );
-                                requestQueue12.add(jsonArrayRequest12);
-                            }
-                            break;
-                            default:
-                                break;
-                    }
-                }
-                    }
-            //onClick()
+
+
+
+                    }//onClick()
         });
 
     }//onCreate()

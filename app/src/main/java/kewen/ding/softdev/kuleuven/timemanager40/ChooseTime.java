@@ -19,7 +19,6 @@ import java.util.Calendar;
 
 public class ChooseTime extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
     public static final String EXTRA_MESSAGE = "com.example.myapplication2.STUDY_TIME";
-
     public int beginHour=0;
     public int beginMin=0;
     public int endHour=0;
@@ -33,7 +32,6 @@ public class ChooseTime extends AppCompatActivity implements TimePickerDialog.On
     public TextView textView2;
     public TextView textView21;
     public TextView textView23;
-    private Button button23;
     private TextView textView25;
     private TextView textView27;
     private TextView textView29;
@@ -53,17 +51,17 @@ public class ChooseTime extends AppCompatActivity implements TimePickerDialog.On
         button21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c= Calendar.getInstance();
+                final Calendar c= Calendar.getInstance();// get the default time zone and locale
                 int hour=c.get(Calendar.HOUR_OF_DAY);
                 int minute=c.get(Calendar.MINUTE);
                 beginMin=minute;
                 beginHour=hour;
-                textView21.setText(String.format("%02d" ,beginHour));
-                textView23.setText(String.format("%02d" ,beginMin));
                 DialogFragment timePicker=new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(),"time picker");
             }
         });
+        //reference: https://developer.android.com/guide/topics/ui/controls/pickers#java
+        //reference：https://www.youtube.com/watch?v=QMwaNN_aM3U
 
         Button button23=(Button) findViewById(R.id.button23);
         button23.setOnClickListener(new View.OnClickListener() {
